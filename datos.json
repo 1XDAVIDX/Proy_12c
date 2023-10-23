@@ -46,5 +46,17 @@
     "nombreProducto": "medias",
     "inventarioProducto": "8",
     "precioProducto": "5000"
+  },
+  {
+    "codigoProducto": "09",
+    "nombreProducto": "manilla",
+    "inventarioProducto": "5",
+    "precioProducto": "2000"
+  },
+  {
+    "codigoProducto": "10",
+    "nombreProducto": "anillo",
+    "inventarioProducto": "9",
+    "precioProducto": "7000"
   }
 ]
