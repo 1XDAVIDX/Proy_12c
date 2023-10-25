@@ -89,17 +89,21 @@ class ProductosTienda {
       console.error(error); // Manejar error en caso de fallo
     }
 
-    let contador = 0;
+    let contador = 0; // Inicializa un contador en 0 para llevar un registro del número de productos procesados.
 
-    if (datosArchivo.length > 0) {
-      datosArchivo.forEach(objeto => {
-        contador++;
-        let producto = new Producto;
+    if (datosArchivo.length > 0) { // Verifica si hay datos en el archivo (es decir, si el arreglo 'datosArchivo' tiene elementos).
+      datosArchivo.forEach(objeto => { // Itera sobre cada objeto en el arreglo 'datosArchivo'.
+        contador++; // Incrementa el contador en 1.
+    
+        let producto = new Producto; // Crea una nueva instancia de la clase 'Producto' y la asigna a la variable 'producto'.
+    
+        // Establece las propiedades del producto con los valores del objeto actual en el bucle.
         producto.setCodigoProducto = objeto.codigoProducto;
         producto.setNombreProducto = objeto.nombreProducto;
         producto.setInventarioProducto = objeto.inventarioProducto;
         producto.setPrecioProducto = objeto.precioProducto;
-        this.#listaProducto.push(producto);
+    
+        this.#listaProducto.push(producto); // Agrega el producto a la lista de productos de la tienda.
       });
     }
 
@@ -108,24 +112,27 @@ class ProductosTienda {
 
   // Método para guardar productos en un archivo
   grabarArchivoProductos() {
+    // Mapea la lista de productos y crea un nuevo array de objetos con las propiedades deseadas
     const instanciaClaseAObjetos = this.getListaProductos.map(producto =>{
       return {
-        codigoProducto: producto.getCodigoProducto,
-        nombreProducto: producto.getNombreProducto,
-        inventarioProducto: producto.getInventarioProducto,
-        precioProducto: producto.getPrecioProducto
+        codigoProducto: producto.getCodigoProducto, // Obtiene el código del producto
+        nombreProducto: producto.getNombreProducto, // Obtiene el nombre del producto
+        inventarioProducto: producto.getInventarioProducto, // Obtiene el inventario del producto
+        precioProducto: producto.getPrecioProducto // Obtiene el precio del producto
       };
     });
-
-    const cadenaJson = JSON.stringify(instanciaClaseAObjetos,null,2);
-    const nombreArchivo = 'datos.json';
-
-    fs.writeFileSync(nombreArchivo, cadenaJson, 'UTF-8'); // Escribir en archivo
-    console.log(`DATOS GUARDADOS EN ${nombreArchivo}`);
+  
+    const cadenaJson = JSON.stringify(instanciaClaseAObjetos,null,2); // Convierte el array de objetos a una cadena JSON con formato legible
+    const nombreArchivo = 'datos.json'; // Nombre del archivo a escribir
+  
+    fs.writeFileSync(nombreArchivo, cadenaJson, 'UTF-8'); // Escribe el JSON en el archivo 'datos.json' en formato UTF-8
+    console.log(`DATOS GUARDADOS EN ${nombreArchivo}`); // Imprime un mensaje indicando que los datos se han guardado en el archivo
   }
+  
 
   // Método para mostrar todos los productos en consola
   mostrarProductos() {
+    // Itera sobre la lista de productos y muestra la información de cada producto en la consola.
     this.getListaProductos.forEach(producto => {
       console.log(`│ Código: ${producto.getCodigoProducto} │ Nombre: ${producto.getNombreProducto} │ Inventario: ${producto.getInventarioProducto} │ Precio: ${producto.getPrecioProducto} │`);
     });
